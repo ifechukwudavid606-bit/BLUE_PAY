@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BLUEPAY</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">BLUEPAY</a>
+    <button id="menuButton" class="secondary">☰ Menu</button>
+  </header>
+
+  <nav id="menu" class="menu hidden">
+    <button data-page="home">Home</button>
+    <button data-page="account">Account</button>
+    <button data-page="withdraw">Withdraw</button>
+    <button data-page="faq">FAQ</button>
+    <button data-page="contact">Contact</button>
+    <button data-page="group">Group</button>
+    <button id="logoutButton" class="hidden">Log out</button>
+    <button id="adminToggle">Admin</button>
+  </nav>
+
+  <main>
+    <section id="notice" class="notice hidden" role="status"></section>
+
+    <section id="homePage" class="page">
+      <div class="hero">
+        <p class="eyebrow">YOUR ACCOUNT, YOUR CONTROL</p>
+        <h1>Welcome to BLUEPAY</h1>
+        <p>Create an account, submit payment references and track request statuses.</p>
+        <button data-page="account">Get started</button>
+      </div>
+
+      <div class="panel">
+        <h2>Payment request</h2>
+        <p>Submit your transfer reference after making a payment through the payment method confirmed by the site owner.</p>
+        <form id="paymentForm">
+          <label for="paymentAmount">Amount (₦)</label>
+          <input id="paymentAmount" type="number" min="1" max="10000000" required>
+          <label for="paymentReference">Transfer reference</label>
+          <input id="paymentReference" maxlength="100" required>
+          <button type="submit">Submit payment reference</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>Payment history</h2>
+        <div id="paymentsList">Log in to view your requests.</div>
+      </div>
+    </section>
+
+    <section id="accountPage" class="page hidden">
+      <div class="panel">
+        <h2 id="authTitle">Create account</h2>
+        <form id="authForm">
+          <label for="email">Email</label>
+          <input id="email" type="email" autocomplete="email" required>
+          <label for="password">Password</label>
+          <input id="password" type="password" minlength="8" maxlength="128" autocomplete="current-password" required>
+          <button id="authSubmit" type="submit">Sign up</button>
+        </form>
+        <p><button id="switchAuth" class="link-button">Already registered? Log in</button></p>
+      </div>
+
+      <div class="panel">
+        <h2>Your account</h2>
+        <p id="accountStatus">You are not logged in.</p>
+        <button id="refreshButton" class="secondary">Refresh account</button>
+      </div>
+    </section>
+
+    <section id="withdrawPage" class="page hidden">
+      <div class="panel">
+        <h2>Verify BPC code</h2>
+        <p>Your account must be approved before you can request a withdrawal.</p>
+        <form id="bpcForm">
+          <label for="bpcCode">BPC code</label>
+          <input id="bpcCode" autocomplete="off" required>
+          <button type="submit">Verify code</button>
+        </form>
+      </div>
+
+      <div id="withdrawFields" class="panel hidden">
+        <h2>Withdrawal request</h2>
+        <form id="withdrawForm">
+          <label for="withdrawAmount">Amount (₦)</label>
+          <input id="withdrawAmount" type="number" min="1" max="10000000" required>
+          <label for="withdrawMethod">Payout method</label>
+          <select id="withdrawMethod" required>
+            <option value="bank">Bank transfer</option>
+            <option value="paypal">PayPal</option>
+          </select>
+          <label for="withdrawAccount">Payout details</label>
+          <input id="withdrawAccount" maxlength="200" placeholder="Enter your payout details" required>
+          <button type="submit">Submit withdrawal request</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>Withdrawal history</h2>
+        <div id="withdrawalsList">Log in to view your requests.</div>
+      </div>
+    </section>
+
+    <section id="faqPage" class="page hidden panel">
+      <h2>Frequently asked questions</h2>
+      <h3>How do I submit a payment?</h3>
+      <p>Log in and submit your amount and transfer reference. The site administrator must review it.</p>
+      <h3>Are payments automatically verified?</h3>
+      <p>No. This demo does not independently verify transfers.</p>
+      <h3>Are withdrawals automatic?</h3>
+      <p>No. Requests are stored for manual review and do not send money automatically.</p>
+    </section>
+
+    <section id="contactPage" class="page hidden panel">
+      <h2>Contact</h2>
+      <p>Contact the site owner through your verified official support channel.</p>
+    </section>
+
+    <section id="groupPage" class="page hidden panel">
+      <h2>Community group</h2>
+      <p>Ask the site owner for the official community group link.</p>
+    </section>
+
+    <section id="adminPage" class="page hidden">
+      <div class="panel">
+        <h2>Admin login</h2>
+        <form id="adminLoginForm">
+          <label for="adminKey">Admin access key</label>
+          <input id="adminKey" type="password" autocomplete="current-password" required>
+          <button type="submit">Log in as admin</button>
+        </form>
+      </div>
+
+      <div id="adminDashboard" class="hidden">
+        <div class="panel">
+          <h2>Customer requests</h2>
+          <button id="clearDisplayButton" class="secondary">Refresh request list</button>
+          <div id="adminPayments"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Customers</h2>
+          <div id="adminUsers"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Withdrawal requests</h2>
+          <div id="adminWithdrawals"></div>
+        </div>
+
+        <button id="adminLogout" class="secondary">Admin log out</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>BLUEPAY · Demo service</footer>
+</body>
+</html>
